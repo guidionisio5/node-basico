@@ -1,0 +1,17 @@
+{
+  "name": "at06-modulolodash",
+  "version": "1.0.0",
+  "description": "Conhecendo Lodash",
+  "main": "at06-ModuloLodash.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lodash"
+  ],
+  "author": "Guilherme Dionisio",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
