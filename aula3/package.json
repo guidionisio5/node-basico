@@ -1,0 +1,21 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "aprendendo node express",
+  "main": "at10-expressHttp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon at11-expressParametros.js"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "express"
+  ],
+  "author": "João",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
