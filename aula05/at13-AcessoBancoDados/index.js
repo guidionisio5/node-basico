@@ -1,0 +1,142 @@
+// importação express
+
+const express = require('express')
+const con = require("./conexao")
+
+const app = express()
+
+const porta = 3900
+
+
+app.use(express.static('views/public'));
+
+
+// decodifica os parametros enviados para a rota
+app.use(express.urlencoded({extended: true}))
+
+// converte os valores para o formato json
+app.use(express.json())
+
+
+
+app.get('/',(req,res)=>{
+    res.status(200)
+    res.send('<h1> Index - Rotas </h1>')
+})
+
+
+app.get('/cadastrar',(req,res)=>{
+    res.status(200)
+    res.sendFile(__dirname+'/views/cadastrar.html')
+})
+
+app.get('/consultar',(req,res)=>{   
+    res.status(200)
+   
+    try {
+
+        let sql = "SELECT nome,email,ativo,data_cadastro FROM tb_login"
+
+        con.query(sql,(error,result)=>{
+         if (error) {
+            res.send(`Não foi possivel listar os registros ${error}`)
+            
+           
+         }
+         res.send(result)
+        })
+    } catch (error) {
+        res.send(`Não foi possivel listar os registros ${error}`)
+
+    }
+    
+})
+
+
+app.post('/cadastrar/login',(req,res)=>{
+    
+    let {nome,email,senha,confirmar} = req.body
+
+    // res.json({ retorno: 'ok',mensagem:'usuario adicionado com sucesso!'})
+
+    // res.send(`email:${email} senha:${senha}`)
+
+    if(senha != confirmar){
+        res.send('<h1>Senhas não conferem!!</h1>')
+        return
+    }
+
+    try {
+        let sql = `INSERT INTO tb_login(nome,email,senha)
+                VALUES('${nome}','${email}','${senha}')`
+
+
+        con.query(sql,(error,result)=>{
+            if (error) {
+                return res.send(`Erro ao cadastrar: ${error}`)
+            }
+        })
+
+        res.send(`Cadastro realizado com sucesso!`)
+
+    }catch (error){
+        res.send(`Erro ao cadastrar ${error}`)
+    }
+
+
+})
+
+
+app.patch('/atualizar/login',(req,res)=>{
+    
+    let {nome,email} = req.params
+
+    try {
+        let sql = `UPDATE tb_login SET nome=${nome}, email=${email}
+        WHERE id = ${id}`
+        con.query(sql,(error,result)=>{
+            if (error) {
+                return res.send(`Não foi possivel atualizar os dados`)
+            }
+
+            res.send(`Dados atualizados com sucesso!`)
+
+        })
+    } catch (error) {
+        return res.send(`Não foi possivel realizar a ação!`)
+    }
+
+})
+
+app.delete('/deletar/login',(req,res)=>{
+
+    let id = req.body.id
+
+    try{
+        // comando que sera executado
+        let sql = `DELETE FROM tb_login WHERE id = ${id}`
+
+        con.query(sql,(error,result)=>{
+            
+            if (error) {
+                return res.send(`Não foi possivel deletar o registro! ${error}`)
+            }
+            res.send(`Registro deletado com sucesso!`)
+
+        })
+
+    }catch (error){
+        return res.send(`Não foi possivel deletar o registro!`)
+    }
+})
+
+// rota para retorno da pagina de erro
+// importante -> ficar no final das rotas
+app.use((req,res)=>{
+    res.status(404)
+    res.send('<h1> Página não encontrada! </h1>')
+})
+
+app.listen(porta,()=>{
+    console.log(`Servidor rodando: http://localhost:${porta}`)
+})
