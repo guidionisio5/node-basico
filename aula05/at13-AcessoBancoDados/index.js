@@ -30,13 +30,18 @@ app.get('/cadastrar',(req,res)=>{
     res.sendFile(__dirname+'/views/cadastrar.html')
 })
 
-app.get('/consultar',(req,res)=>{   
+app.get('/consultar/:id?',(req,res)=>{   
     res.status(200)
    
     try {
 
-        let sql = "SELECT nome,email,ativo,data_cadastro FROM tb_login"
-
+        let id = req.params.id
+        if(typeof id == 'undefined'){
+            var sql = `SELECT nome,email,ativo,data_cadastro FROM tb_login`
+        }else{
+            var sql = `SELECT nome,email,ativo,data_cadastro FROM tb_login WHERE id = ${id}`
+        }
+        
         con.query(sql,(error,result)=>{
          if (error) {
             res.send(`Não foi possivel listar os registros ${error}`)
@@ -45,6 +50,7 @@ app.get('/consultar',(req,res)=>{
          }
          res.send(result)
         })
+
     } catch (error) {
         res.send(`Não foi possivel listar os registros ${error}`)
 

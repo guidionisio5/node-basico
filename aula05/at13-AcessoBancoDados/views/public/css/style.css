@@ -2,43 +2,44 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  
+  font-family:    Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .container{
   display: grid;
   justify-items: center;
   align-items: center;
   height: 100vh;
-  
-}
-
-body{
-  font-family:    Verdana, Geneva, Tahoma, sans-serif;
   background-color: white;
 }
 
-  
-input{
-  padding: 4px 12px;
-  width: 100%;
+.titulo{
+  font-size: 30px;
 }
 
 .form-grid{
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  justify-items: center;
-  align-items: center;
-  padding: 50px 150px;
+  grid-template-columns: 2fr;
+  gap: 20px;
+  padding: 50px 150px; 
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   background-color: rgba(209, 209, 209, 0.589);
   border: rgba(0, 0, 0, 0.555) solid 0.3px;
+}
+ 
+.input{
+  padding: 4px 12px;
+  width: 100%;
+}
+
+.center{
+  text-align: center;
 }
 
 .btn-cadastrar{
   background-color: rgb(233, 23, 233);
   color: white;
-  padding: 6px 12px;
+  padding: 10px 20px;
   display: grid;
   border-radius: 3px;
   border: none;
