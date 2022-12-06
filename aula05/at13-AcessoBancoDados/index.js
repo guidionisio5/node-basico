@@ -68,7 +68,7 @@ app.post('/cadastrar/login',(req,res)=>{
     // res.send(`email:${email} senha:${senha}`)
 
     if(senha != confirmar){
-        res.send('<h1>Senhas não conferem!!</h1>')
+        res.json({"retorno":"erro","mensagem":"Senhas não conferem!"})
         return
     }
 
@@ -83,7 +83,7 @@ app.post('/cadastrar/login',(req,res)=>{
             }
         })
 
-        res.send(`Cadastro realizado com sucesso!`)
+        res.json({"retorno":"ok","mensagem":"Casdastrado com sucesso!"})
 
     }catch (error){
         res.send(`Erro ao cadastrar ${error}`)
