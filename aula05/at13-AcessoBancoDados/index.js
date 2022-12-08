@@ -1,8 +1,7 @@
 // importação express
-
 const express = require('express')
 const con = require("./conexao")
-
+const validaCampoVazio = require("./validaCampoVazio");
 const app = express()
 
 const porta = 3900
@@ -63,9 +62,12 @@ app.post('/cadastrar/login',(req,res)=>{
     
     let {nome,email,senha,confirmar} = req.body
 
-    // res.json({ retorno: 'ok',mensagem:'usuario adicionado com sucesso!'})
-
-    // res.send(`email:${email} senha:${senha}`)
+    // funcao valida os campos vazios
+    // validaCampoVazio(nome,'nome')
+    if(nome == '' || email == '' || senha || '' || confirmar == ''){
+        res.json({"retorno":"erro","mensagem":"Campo obrigatório vazio!"})
+        return
+    }
 
     if(senha != confirmar){
         res.json({"retorno":"erro","mensagem":"Senhas não conferem!"})
@@ -79,17 +81,17 @@ app.post('/cadastrar/login',(req,res)=>{
 
         con.query(sql,(error,result)=>{
             if (error) {
-                return res.send(`Erro ao cadastrar: ${error}`)
+                return res.json({"retorno":"erro","mensagem":`Erro ao cadastrar ${error}`})
             }
         })
 
-        res.json({"retorno":"ok","mensagem":"Casdastrado com sucesso!"})
+        res.json({"retorno":"ok","mensagem":"Cadastrado com sucesso!"})
 
     }catch (error){
-        res.send(`Erro ao cadastrar ${error}`)
+
+        res.json({"retorno":"erro","mensagem":`Erro ao cadastrar ${error}`})
+    
     }
-
-
 })
 
 

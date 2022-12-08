@@ -19,9 +19,11 @@ const cadastrarLogin = () =>{
         if(result.retorno == 'ok'){
             Swal.fire({
                 icon: 'success',
-                title: 'Sucesso',
+                title: 'Sucesso!',
                 text: result.mensagem,
             })
+            // limpa o formulario
+            $('#form-login')[0].reset()
         }else{
             Swal.fire({
                 icon: 'error',
