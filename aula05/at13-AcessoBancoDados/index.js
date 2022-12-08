@@ -20,7 +20,7 @@ app.use(express.json())
 
 app.get('/',(req,res)=>{
     res.status(200)
-    res.send('<h1> Index - Rotas </h1>')
+    res.sendFile(__dirname+'/views/login.html')
 })
 
 
@@ -135,6 +135,31 @@ app.delete('/deletar/login',(req,res)=>{
 
     }catch (error){
         return res.send(`Não foi possivel deletar o registro!`)
+    }
+})
+
+app.post('/validar/login',(req,res)=>{
+
+    let {email,senha} = req.body
+
+    try{
+
+        let sql = `SELECT email FROM tb_login WHERE email='${email}' AND BINARY senha = '${senha}' AND ativo = 1 `;
+        
+        con.query(sql,(error,result)=>{
+            if (error) {
+                return res.json({"retorno":"erro","mensagem":`Erro ao validar usuário ${error}`})
+            }
+
+            if(result == ''){
+                res.json({"retorno":"erro","mensagem":"E-mail e senha inválidos!"})
+            }else{
+                res.json({"retorno":"ok","mensagem":"Aguarde estamos logando!"})
+            }
+        })
+
+    }catch (error) {
+        res.json({"retorno":"erro","mensagem":`Erro ao cadastrar ${error}`})
     }
 })
 

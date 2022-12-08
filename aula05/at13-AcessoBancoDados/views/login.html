@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <form id="form-login">
+            <div class="form-grid">
+                <div>
+                    <h2 class="titulo center">Login</h2>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input class="input" type="email" name="email" id="email">
+                </div>
+                <div>
+                    <label for="senha">Senha</label>
+                    <input class="input" type="password" name="senha" id="senha">
+                </div>
+                
+                <small><a class="link-a center" href="/cadastrar">Não possui cadastro? Cadastre-se aqui!</a></small>
+                <button class="btn-cadastrar center" type="button" onclick="validarLogin()">Entrar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+
+    <script src="js/sweetalert2@11.js"></script>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>
