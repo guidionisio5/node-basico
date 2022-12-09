@@ -154,7 +154,12 @@ app.post('/validar/login',(req,res)=>{
             if(result == ''){
                 res.json({"retorno":"erro","mensagem":"E-mail e senha inválidos!"})
             }else{
+                // nesse trecho de codigo é iniciado a sessao do usuario
+                // em NODE.JS o mais comum é utilizar: 
+                // LOCALSTORAGE ou COOCKIES para armazenar dados da sessao do usuario
+                // pesquisar sobre autenticacao JWTToken
                 res.json({"retorno":"ok","mensagem":"Aguarde estamos logando!"})
+                // res.redirect('/admin')
             }
         })
 
