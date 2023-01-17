@@ -4,8 +4,14 @@ const express = require('express')
 // inicializa o express 
 const app = express()
 
+// importa o modulo do usuario do banco
+const usuario = new require('./model/usuario')
+
 // porta do servidor
 const porta = 5000;
+
+// carrega conteudo estatico(CSS,JS,IMG)
+app.use(express.static('views/public'));
 
 // rota padrao
 app.get('/',(req,res)=>{
