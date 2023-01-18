@@ -6,6 +6,7 @@ const app = express()
 
 // importa o modulo do usuario do banco
 const usuario = new require('./model/usuario')
+const produto = new require('./model/produto')
 
 // porta do servidor
 const porta = 5000;
@@ -27,8 +28,14 @@ app.get('/login',(req,res)=>{
 
 // rota cadastrar
 app.get('/cadastrar',(req,res)=>{
+    // comando para inserir registros usando sequelize
+    usuario.create({
+        nome: "Gui",
+        email: "gui@gmail.com",
+        senha: "123"
+    }) 
     // res.status(200)
-    res.sendFile(__dirname+'/views/cadastrar.html')
+    res.sendFile(__dirname+'/views/cadastrar-usuarios.html')
 })
 
 // inicia o servidor
