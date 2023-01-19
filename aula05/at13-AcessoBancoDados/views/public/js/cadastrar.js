@@ -16,6 +16,7 @@ const cadastrarLogin = () =>{
     })
     .then((response) => response.json())
     .then((result)=>{
+        
         if(result.retorno == 'ok'){
             Swal.fire({
                 icon: 'success',

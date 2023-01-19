@@ -2,3 +2,10 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.container{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+}
